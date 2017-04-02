@@ -4,9 +4,11 @@ This code can be used to anaylse the dataset provided by the U.S. National Epide
 
 # How to
 - Setting up analysis/analysis.py
-  - Set the variable dataset_path so that it points to the NESARC CSV file
-  - Set the variable variable_definition_path so that it points to the file predefined_variables.json
-2. Run analysis.py, since the entire dataset will be loaded into the computer's memory, this might take a couple of minutes.
+  - Set the variable "dataset_path" so that it points to the NESARC CSV file
+  - Set the variable "variable_definition_path" so that it points to the file "predefined_variables.json"
+2. Run analysis.py, since the entire dataset will be loaded into the computer's memory, this might take a couple of minutes
 
 # Configuring predefined variables
-Predefined variables serve as a codebook and make it easier to analyse later on. You can add or remove any variables to the configuration by editing the file predefined_variables.json. The key of the dictionary items serve as a unique identifier for each variable. You can lookup all possible identifiers  and their meaning the in the official NESARC codebook.
+Predefined variable are the basis for fast and easy analyses of the nesarc dataset. You can add or remove any variables of interest by editing the default configuration file "predefined_variables.json".
+
+The key of each ditionary item in the configuration file serves as a unique identifier. These identifiers are equivalent to the column titles in the CSV dataset file. You can look up all possible variable identifiers and their meaning the in the official NESARC codebook.
