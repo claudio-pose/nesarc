@@ -7,12 +7,17 @@ Created on Sat Apr  1 17:27:56 2017
 
 import pandas as pd
 import json
-from pathlib import Path
 import os.path
 import os
+from pathlib import Path
+from typing import Tuple
 
 
 class DataframeHelper:
+    """
+    TODO DOCSTRING
+    """
+
     df = None
     columns = None
     freq = dict()
@@ -20,7 +25,13 @@ class DataframeHelper:
     dataset_path = None
     variable_definition_path = None
     
-    def __init__(self, dataset_path, variable_definition_path):
+    def __init__(self, dataset_path: str, variable_definition_path: str):
+        """
+        TODO DOCSTRING
+        :param dataset_path: 
+        :param variable_definition_path: 
+        """
+
         self.dataset_path = dataset_path
         self.variable_definition_path = variable_definition_path
         
@@ -33,39 +44,50 @@ class DataframeHelper:
             self.columns = self.variables.keys()
    
         self.convert_colums_to_numeric()
-        
-    """
-    Converts all specified columns of a given dataframe into numeric values.
-    If no columns are passed, all columns of the dataframe will be converted.
-    
-    @author: Claudio Pose
-    """
-    def convert_colums_to_numeric(self):
+
+    def convert_colums_to_numeric(self) -> None:
+        """Converts all specified columns of a given dataframe into numeric values.
+        If no columns are passed, all columns of the dataframe will be converted.
+
+        @author: Claudio Pose
+        :return: 
+        """
+
         for c in self.columns:
             self.df[c] = pd.to_numeric(self.df[c], errors='coerce')
-    
-    """
-    Calculates the value distribution (frequencies and percentages) for specified columns of a given dataframe.
-    If no columns are passed, the value distribution will be calculated for all colums of the dataframe.
-    
-    @author: Claudio Pose
-    """
-    def calc_frequency_tables(self):
+
+    def calc_frequency_tables(self) -> Tuple[str, str]:
+        """Calculates the value distribution (frequencies and percentages) for specified columns of a given dataframe.
+        If no columns are passed, the value distribution will be calculated for all colums of the dataframe.
+
+        @author: Claudio Pose
+        :return: 
+        """
+
         for column in self.columns:        
             self.freq[column] = self.df[column].value_counts(sort=self.variables[column]['sort'], dropna=self.variables[column]['dropna'])
             self.percent[column] = self.df[column].value_counts(sort=self.variables[column]['sort'], dropna=self.variables[column]['dropna'], normalize=True)
-        
+
+        print(type(self.freq))
         return self.freq, self.percent
     
-    def read_variable_definitions(self):
+    def read_variable_definitions(self) -> None:
+        """TODO DOCSTRING
+        :return: 
+        """
+
         with open(self.variable_definition_path) as json_data:
             self.variables = json.load(json_data)
     
-    def write_variable_definitions(self):
+    def write_variable_definitions(self) -> None:
+        """TODO DOCSTRING
+        :return: 
+        """
+
         path = Path(self.variable_definition_path)
         if path.is_file():
             os.remove(self.variable_definition_path + '.old')  # delete old backup
             os.rename(self.variable_definition_path, self.variable_definition_path + '.old')  # mark last saved variable definition as "old"
 
         with open(self.variable_definition_path, 'w') as outfile:  # serialize current active variable definition
-            json.dump(self.variables, outfile)    
+            json.dump(self.variables, outfile)
