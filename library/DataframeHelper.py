@@ -11,6 +11,7 @@ from pathlib import Path
 import os.path
 import os
 
+
 class DataframeHelper:
     df = None
     columns = None
@@ -24,7 +25,6 @@ class DataframeHelper:
         self.variable_definition_path = variable_definition_path
         
         self.read_variable_definitions()
-                
         self.df = pd.read_csv(dataset_path, low_memory=False)     
 
         if variable_definition_path is None:
@@ -45,7 +45,7 @@ class DataframeHelper:
             self.df[c] = pd.to_numeric(self.df[c], errors='coerce')
     
     """
-    Calulates the value distribution (frequencies and percentages) for specified columns of a given dataframe.
+    Calculates the value distribution (frequencies and percentages) for specified columns of a given dataframe.
     If no columns are passed, the value distribution will be calculated for all colums of the dataframe.
     
     @author: Claudio Pose
@@ -55,7 +55,7 @@ class DataframeHelper:
             self.freq[column] = self.df[column].value_counts(sort=self.variables[column]['sort'], dropna=self.variables[column]['dropna'])
             self.percent[column] = self.df[column].value_counts(sort=self.variables[column]['sort'], dropna=self.variables[column]['dropna'], normalize=True)
         
-        return (self.freq, self.percent)
+        return self.freq, self.percent
     
     def read_variable_definitions(self):
         with open(self.variable_definition_path) as json_data:
@@ -64,8 +64,8 @@ class DataframeHelper:
     def write_variable_definitions(self):
         path = Path(self.variable_definition_path)
         if path.is_file():
-            os.remove( self.variable_definition_path + '.old') # delete old backup
-            os.rename(self.variable_definition_path, self.variable_definition_path + '.old') # create new backup
+            os.remove(self.variable_definition_path + '.old')  # delete old backup
+            os.rename(self.variable_definition_path, self.variable_definition_path + '.old')  # mark last saved variable definition as "old"
 
-        with open(self.variable_definition_path, 'w') as outfile: 
+        with open(self.variable_definition_path, 'w') as outfile:  # serialize current active variable definition
             json.dump(self.variables, outfile)    
