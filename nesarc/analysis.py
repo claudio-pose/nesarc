@@ -15,4 +15,5 @@ if __name__ == "__main__":
 
     df_helper = library.DataframeHelper(dataset_path, variable_definition_path)
 
-    frequency_table.print_frequency_tables(df_helper, ['S12Q3D', 'S12Q3I'])
+    frequency_table.print_frequency_tables(df_helper, ['S12Q1', 'S12Q3I'])
+    

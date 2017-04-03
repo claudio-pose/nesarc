@@ -33,7 +33,12 @@ def print_single_variable(df_helper: DataframeHelper, column: str) -> None:
     if column not in df_helper.freq:  # Check whether the frequency table has been calculated
         print('Frequency table not found. Check if variable was predefined:' + column)
     else:  # print the frequencies and percentages for the given variable
+        print('-----------------------------------------------------------------') 
         print(df_helper.variables[column]['description'])
+        print('')
+        print('FREQUENCIES')
         print(df_helper.freq[column])
-        print(df_helper.percent[column])
+        print('')
+        print('PERCENTAGES')
+        print(df_helper.percent[column])     
         print('')

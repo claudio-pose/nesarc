@@ -1,1 +1,154 @@
-{"S12Q1": {"sort": false, "dropna": true, "description": "EVER GAMBLED 5+ TIMES IN ANY ONE YEAR"}, "S12Q2A12": {"sort": false, "dropna": true, "description": "EVER RAISE GAMBLING MONEY BY WRITING A BAD CHECK, SIGNING SOMEONE ELSE'S NAME TO A CHECK, STEALING, CASHING SOMEONE ELSE'S CHECK OR IN SOME OTHER ILLEGAL WAY"}, "S12Q3D": {"sort": true, "dropna": true, "description": "AGE AT ONSET OF PATHOLOGICAL GAMBLING"}, "S12Q3I": {"sort": true, "dropna": true, "description": "AGE AT FULL REMISSION ON PATHOLOGICAL GAMBLING"}, "GAMB12DX": {"sort": false, "dropna": true, "description": "PATHOLOGICAL GAMBLING IN LAST 12 MONTHS"}, "GAMBEVDX": {"sort": false, "dropna": true, "description": "PATHOLOGICAL GAMBLING - LIFETIME"}, "ANTISOCDX2": {"sort": false, "dropna": true, "description": "ANTISOCIAL PERSONALITY DISORDER (WITH CONDUCT DISORDER)"}, "S11AQ1A13": {"sort": false, "dropna": true, "description": "HAPPEN AT ANY AGE: EVER SCAM OR CON SOMEONE FOR MONEY, TO AVOID RESPONSIBILITY OR JUST FOR FUN"}, "S11AQ1B13": {"sort": false, "dropna": true, "description": "HAPPEN BEFORE AGE 15: EVER SCAM OR CON SOMEONE FOR MONEY, TO AVOID RESPONSIBILITY OR JUST FOR FUN"}, "S11AQ1C13": {"sort": false, "dropna": true, "description": "HAPPEN SINCE AGE 15: EVER SCAM OR CON SOMEONE FOR MONEY, TO AVOID RESPONSIBILITY OR JUST FOR FUN"}, "S11AQ1A20": {"sort": false, "dropna": true, "description": "HAPPEN AT ANY AGE: EVER STEAL SOMETHING FROM SOMEONE/SOMEPLACE WHEN NO ONE WAS AROUND"}, "S11AQ1B20": {"sort": false, "dropna": true, "description": "HAPPEN BEFORE AGE 15: EVER STEAL SOMETHING FROM SOMEONE/SOMEPLACE WHEN NO ONE WAS AROUND"}, "S11AQ1C20": {"sort": false, "dropna": true, "description": "HAPPEN SINCE AGE 15: EVER STEAL SOMETHING FROM SOMEONE/SOMEPLACE WHEN NO ONE WAS AROUND"}, "S11AQ1A23": {"sort": false, "dropna": true, "description": "HAPPEN AT ANY AGE: EVER ROB OR MUG SOMEONE OR SNATCH A PURSE"}, "S11AQ1B23": {"sort": false, "dropna": true, "description": "HAPPEN BEFORE AGE 15: EVER ROB OR MUG SOMEONE OR SNATCH A PURSE"}, "S11AQ1C23": {"sort": false, "dropna": true, "description": "HAPPEN SINCE AGE 15: EVER ROB OR MUG SOMEONE OR SNATCH A PURSE"}, "S11AQ1A24": {"sort": false, "dropna": true, "description": "HAPPEN AT ANY AGE: EVER MAKE MONEY ILLEGALLY, LIKE SELLING STOLEN PROPERTY OR SELLING DRUG"}, "S11AQ1B24": {"sort": false, "dropna": true, "description": "HAPPEN BEFORE AGE 15:EVER MAKE MONEY ILLEGALLY, LIKE SELLING STOLEN PROPERTY OR SELLING DRUG"}, "S11AQ1C24": {"sort": false, "dropna": true, "description": "HAPPEN SINCE AGE 15: EVER MAKE MONEY ILLEGALLY, LIKE SELLING STOLEN PROPERTY OR SELLING DRUG"}, "S11AQ1A21": {"sort": false, "dropna": true, "description": "HAPPEN AT ANY AGE: EVER FORGE SOMEONE ELSE'S SIGNATURE, LIKE ON A LEGAL DOCUMENT OR CHECK"}, "S11AQ1B21": {"sort": false, "dropna": true, "description": "HAPPEN BEFORE AGE 15: EVER FORGE SOMEONE ELSE'S SIGNATURE, LIKE ON A LEGAL DOCUMENT OR CHECK"}, "S11AQ1C21": {"sort": false, "dropna": true, "description": "HAPPEN SINCE AGE 15: EVER FORGE SOMEONE ELSE'S SIGNATURE, LIKE ON A LEGAL DOCUMENT OR CHECK"}}
+{  
+   "S12Q1":{  
+      "sort":false,
+      "dropna":true,
+      "type": "category",
+      "labels": [ "Yes", "No", "Unknown" ],
+      "description":"EVER GAMBLED 5+ TIMES IN ANY ONE YEAR"
+   },
+   "S12Q2A12":{  
+      "sort":false,
+      "dropna":true,
+      "type": "category",
+      "labels": [ "Yes", "No", "Unknown", "BL" ],
+      "description":"EVER RAISE GAMBLING MONEY BY WRITING A BAD CHECK, SIGNING SOMEONE ELSE'S NAME TO A CHECK, STEALING, CASHING SOMEONE ELSE'S CHECK OR IN SOME OTHER ILLEGAL WAY"
+   },
+   "S12Q3D":{  
+      "sort":true,
+      "dropna":true,
+      "type": "float",
+      "description":"AGE AT ONSET OF PATHOLOGICAL GAMBLING"
+   },
+   "S12Q3I":{  
+      "sort":true,
+      "dropna":true,
+      "type": "float",
+      "description":"AGE AT FULL REMISSION ON PATHOLOGICAL GAMBLING"
+   },
+   "GAMB12DX":{  
+      "sort":false,
+      "dropna":true,
+      "type": "category",
+      "labels": [ "No", "Yes" ],
+      "description":"PATHOLOGICAL GAMBLING IN LAST 12 MONTHS"
+   },
+   "GAMBEVDX":{  
+      "sort":false,
+      "dropna":true,
+      "type": "category",
+      "labels": [ "No", "Yes" ],
+      "description":"PATHOLOGICAL GAMBLING - LIFETIME"
+   },
+   "ANTISOCDX2":{  
+      "sort":false,
+      "dropna":true,
+      "type": "category",
+      "labels": [ "No", "Yes" ],
+      "description":"ANTISOCIAL PERSONALITY DISORDER (WITH CONDUCT DISORDER)"
+   },
+   "S11AQ1A13":{  
+      "sort":false,
+      "dropna":true,
+      "type": "category",
+      "labels": [ "Yes", "No", "Unknown" ],
+      "description":"HAPPEN AT ANY AGE: EVER SCAM OR CON SOMEONE FOR MONEY, TO AVOID RESPONSIBILITY OR JUST FOR FUN"
+   },
+   "S11AQ1B13":{  
+      "sort":false,
+      "dropna":true,
+      "type": "category",
+      "labels": [ "Yes", "No", "Unknown" ],
+      "description":"HAPPEN BEFORE AGE 15: EVER SCAM OR CON SOMEONE FOR MONEY, TO AVOID RESPONSIBILITY OR JUST FOR FUN"
+   },
+   "S11AQ1C13":{  
+      "sort":false,
+      "dropna":true,
+      "type": "category",
+      "labels": [ "Yes", "No", "Unknown" ],
+      "description":"HAPPEN SINCE AGE 15: EVER SCAM OR CON SOMEONE FOR MONEY, TO AVOID RESPONSIBILITY OR JUST FOR FUN"
+   },
+   "S11AQ1A20":{  
+      "sort":false,
+      "dropna":true,
+      "type": "category",
+      "labels": [ "Yes", "No", "Unknown" ],
+      "description":"HAPPEN AT ANY AGE: EVER STEAL SOMETHING FROM SOMEONE/SOMEPLACE WHEN NO ONE WAS AROUND"
+   },
+   "S11AQ1B20":{  
+      "sort":false,
+      "dropna":true,
+      "type": "category",
+      "labels": [ "Yes", "No", "Unknown" ],
+      "description":"HAPPEN BEFORE AGE 15: EVER STEAL SOMETHING FROM SOMEONE/SOMEPLACE WHEN NO ONE WAS AROUND"
+   },
+   "S11AQ1C20":{  
+      "sort":false,
+      "dropna":true,
+      "type": "category",
+      "labels": [ "Yes", "No", "Unknown" ],
+      "description":"HAPPEN SINCE AGE 15: EVER STEAL SOMETHING FROM SOMEONE/SOMEPLACE WHEN NO ONE WAS AROUND"
+   },
+   "S11AQ1A23":{  
+      "sort":false,
+      "dropna":true,
+      "type": "category",
+      "labels": [ "Yes", "No", "Unknown" ],
+      "description":"HAPPEN AT ANY AGE: EVER ROB OR MUG SOMEONE OR SNATCH A PURSE"
+   },
+   "S11AQ1B23":{  
+      "sort":false,
+      "dropna":true,
+      "type": "category",
+      "labels": [ "Yes", "No", "Unknown" ],
+      "description":"HAPPEN BEFORE AGE 15: EVER ROB OR MUG SOMEONE OR SNATCH A PURSE"
+   },
+   "S11AQ1C23":{  
+      "sort":false,
+      "dropna":true,
+      "type": "category",
+      "labels": [ "Yes", "No", "Unknown" ],
+      "description":"HAPPEN SINCE AGE 15: EVER ROB OR MUG SOMEONE OR SNATCH A PURSE"
+   },
+   "S11AQ1A24":{  
+      "sort":false,
+      "dropna":true,
+      "type": "category",
+      "labels": [ "Yes", "No", "Unknown" ],
+      "description":"HAPPEN AT ANY AGE: EVER MAKE MONEY ILLEGALLY, LIKE SELLING STOLEN PROPERTY OR SELLING DRUG"
+   },
+   "S11AQ1B24":{  
+      "sort":false,
+      "dropna":true,
+      "type": "category",
+      "labels": [ "Yes", "No", "Unknown" ],
+      "description":"HAPPEN BEFORE AGE 15:EVER MAKE MONEY ILLEGALLY, LIKE SELLING STOLEN PROPERTY OR SELLING DRUG"
+   },
+   "S11AQ1C24":{  
+      "sort":false,
+      "dropna":true,
+      "type": "category",
+      "labels": [ "Yes", "No", "Unknown" ],
+      "description":"HAPPEN SINCE AGE 15: EVER MAKE MONEY ILLEGALLY, LIKE SELLING STOLEN PROPERTY OR SELLING DRUG"
+   },
+   "S11AQ1A21":{  
+      "sort":false,
+      "dropna":true,
+      "type": "category",
+      "labels": [ "Yes", "No", "Unknown" ],
+      "description":"HAPPEN AT ANY AGE: EVER FORGE SOMEONE ELSE'S SIGNATURE, LIKE ON A LEGAL DOCUMENT OR CHECK"
+   },
+   "S11AQ1B21":{  
+      "sort":false,
+      "dropna":true,
+      "type": "category",
+      "labels": [ "Yes", "No", "Unknown" ],
+      "description":"HAPPEN BEFORE AGE 15: EVER FORGE SOMEONE ELSE'S SIGNATURE, LIKE ON A LEGAL DOCUMENT OR CHECK"
+   },
+   "S11AQ1C21":{  
+      "sort":false,
+      "dropna":true,
+      "type": "category",
+      "labels": [ "Yes", "No", "Unknown" ],
+      "description":"HAPPEN SINCE AGE 15: EVER FORGE SOMEONE ELSE'S SIGNATURE, LIKE ON A LEGAL DOCUMENT OR CHECK"
+   }
+}

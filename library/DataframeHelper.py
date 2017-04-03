@@ -24,6 +24,7 @@ class DataframeHelper:
     percent = dict()
     dataset_path = None
     variable_definition_path = None
+    variables = None
     
     def __init__(self, dataset_path: str, variable_definition_path: str):
         """
@@ -36,6 +37,7 @@ class DataframeHelper:
         self.variable_definition_path = variable_definition_path
         
         self.read_variable_definitions()
+
         self.df = pd.read_csv(dataset_path, low_memory=False)     
 
         if variable_definition_path is None:
@@ -43,18 +45,26 @@ class DataframeHelper:
         else:
             self.columns = self.variables.keys()
    
-        self.convert_colums_to_numeric()
+        self.convert_colums()
 
-    def convert_colums_to_numeric(self) -> None:
-        """Converts all specified columns of a given dataframe into numeric values.
-        If no columns are passed, all columns of the dataframe will be converted.
+    def convert_colums(self) -> None:
+        """
+        TODO DOCTYPE
 
         @author: Claudio Pose
         :return: 
         """
 
-        for c in self.columns:
-            self.df[c] = pd.to_numeric(self.df[c], errors='coerce')
+        for column in self.columns:
+            if self.variables[column]['type'] == 'category':
+                self.df[column] = self.df[column].astype('category')
+                
+                self.df[column].cat.set_categories(new_categories=self.variables[column]['labels'], rename=True, inplace=True)
+                    
+            elif self.variables[column]['type'] == 'float':
+                self.df[column] = pd.to_numeric(self.df[column], errors='coerce')
+            else:
+                print('Unknown variable type')
 
     def calc_frequency_tables(self) -> Tuple[str, str]:
         """Calculates the value distribution (frequencies and percentages) for specified columns of a given dataframe.
