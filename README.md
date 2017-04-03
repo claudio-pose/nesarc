@@ -9,6 +9,6 @@ This code can be used to anaylse the dataset provided by the U.S. National Epide
 2. Run analysis.py, since the entire dataset will be loaded into the computer's memory, this might take a couple of minutes
 
 # Configuring predefined variables
-Predefined variable are the basis for fast and easy analyses of the nesarc dataset. You can add or remove any variables of interest by editing the default configuration file "predefined_variables.json".
+Predefined variable are the basis for fast and easy analyses of the NESARC dataset. You can add or remove any variables of interest by editing the default configuration file "predefined_variables.json".
 
-The key of each ditionary item in the configuration file serves as a unique identifier. These identifiers are equivalent to the column titles in the CSV dataset file. You can look up all possible variable identifiers and their meaning the in the official NESARC codebook.
+The key of each dictionary item in the configuration file serves as a unique identifier. These identifiers are equivalent to the column titles in the CSV dataset file. You can look up all possible variable identifiers and their meaning the in the official NESARC codebook.
