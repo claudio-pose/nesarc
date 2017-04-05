@@ -12,7 +12,6 @@ import os
 from pathlib import Path
 from typing import Tuple
 
-
 class DataframeHelper:
     """
     TODO DOCSTRING
@@ -25,6 +24,8 @@ class DataframeHelper:
     dataset_path = None
     variable_definition_path = None
     variables = None
+    dataset_path = None
+    variable_definition_path = None
     
     def __init__(self, dataset_path: str, variable_definition_path: str):
         """
@@ -35,18 +36,21 @@ class DataframeHelper:
 
         self.dataset_path = dataset_path
         self.variable_definition_path = variable_definition_path
-        
         self.read_variable_definitions()
 
-        self.df = pd.read_csv(dataset_path, low_memory=False)     
 
-        if variable_definition_path is None:
+    def import_data(self):
+        self.df = pd.read_csv(self.dataset_path, low_memory=False)     
+    
+        if self.variable_definition_path is None:
             self.columns = self.df.columns
         else:
-            self.columns = self.variables.keys()
-   
+            self.columns = list(self.variables.keys())
+       
         self.convert_colums()
+        self.df = self.df[self.columns]
 
+    
     def convert_colums(self) -> None:
         """
         TODO DOCTYPE
