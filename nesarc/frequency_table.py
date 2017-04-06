@@ -1,8 +1,7 @@
-from library import DataframeHelper
+from library import DataFrameHelper
 from typing import List
 
-
-def print_frequency_tables(df_helper: DataframeHelper, columns: List[str] = None) -> None:
+def print_frequency_tables(df_helper: DataFrameHelper, columns: List[str] = None) -> None:
     """
     TODO DOCSTRING
     :param df_helper: 
@@ -22,7 +21,7 @@ def print_frequency_tables(df_helper: DataframeHelper, columns: List[str] = None
             print_single_variable(df_helper, key)
 
 
-def print_single_variable(df_helper: DataframeHelper, column: str) -> None:
+def print_single_variable(df_helper: DataFrameHelper, column: str) -> None:
     """
     TODO DOCSTRING
     :param df_helper: 

@@ -12,7 +12,7 @@ import os
 from pathlib import Path
 from typing import Tuple
 
-class DataframeHelper:
+class DataFrameHelper:
     """
     TODO DOCSTRING
     """
@@ -36,39 +36,31 @@ class DataframeHelper:
 
         self.dataset_path = dataset_path
         self.variable_definition_path = variable_definition_path
-        self.read_variable_definitions()
+        self.import_variable_definitions()
 
 
     def import_data(self):
-        self.df = pd.read_csv(self.dataset_path, low_memory=False)     
+        dtypes = dict()
+        defined_columns = None
+        
+        if self.variables is not None:
+            defined_columns = list(self.variables.keys())
+        
+            for column in defined_columns:
+                dtypes[column] = self.variables[column]['type']
+        
+        self.df = pd.read_csv(self.dataset_path, low_memory=False, na_values=' ', dtype=dtypes)     
     
-        if self.variable_definition_path is None:
-            self.columns = self.df.columns
+        if self.variables is not None:
+            self.columns = defined_columns
+            self.df = self.df[defined_columns]
+            
+            for column in defined_columns:
+                if self.variables[column]['type'] == 'category':
+                    self.df[column].cat.set_categories(new_categories=self.variables[column]['labels'], rename=True, inplace=True)            
         else:
-            self.columns = list(self.variables.keys())
-       
-        self.convert_colums()
-        self.df = self.df[self.columns]
+            self.columns = self.df.columns
 
-    
-    def convert_colums(self) -> None:
-        """
-        TODO DOCTYPE
-
-        @author: Claudio Pose
-        :return: 
-        """
-
-        for column in self.columns:
-            if self.variables[column]['type'] == 'category':
-                self.df[column] = self.df[column].astype('category')
-                
-                self.df[column].cat.set_categories(new_categories=self.variables[column]['labels'], rename=True, inplace=True)
-                    
-            elif self.variables[column]['type'] == 'float':
-                self.df[column] = pd.to_numeric(self.df[column], errors='coerce')
-            else:
-                print('Unknown variable type')
 
     def calc_frequency_tables(self) -> Tuple[str, str]:
         """Calculates the value distribution (frequencies and percentages) for specified columns of a given dataframe.
@@ -77,23 +69,34 @@ class DataframeHelper:
         @author: Claudio Pose
         :return: 
         """
+        
+        # TODO: Refracter: Move this method in a seprate subclass (FrequencyTableAnalysis)
 
-        for column in self.columns:        
-            self.freq[column] = self.df[column].value_counts(sort=self.variables[column]['sort'], dropna=self.variables[column]['dropna'])
-            self.percent[column] = self.df[column].value_counts(sort=self.variables[column]['sort'], dropna=self.variables[column]['dropna'], normalize=True)
-
-        print(type(self.freq))
-        return self.freq, self.percent
+        if self.variables is not None:
+            for column in self.variables:        
+                self.freq[column] = self.df[column].value_counts(sort=self.variables[column]['sort'], dropna=self.variables[column]['dropna'])
+                self.percent[column] = self.df[column].value_counts(sort=self.variables[column]['sort'], dropna=self.variables[column]['dropna'], normalize=True)
+        
+                print(type(self.freq))
+                return self.freq, self.percent
+            
     
-    def read_variable_definitions(self) -> None:
+    def import_variable_definitions(self) -> None:
         """TODO DOCSTRING
         :return: 
         """
-
-        with open(self.variable_definition_path) as json_data:
-            self.variables = json.load(json_data)
+        try:
+            if self.variable_definition_path is not None:
+                with open(self.variable_definition_path) as json_data:
+                    self.variables = json.load(json_data)
+            else:
+                raise Exception
+        except OSError:
+            print("Variable definition file not found. Abstraction methods for handling the dataframe won't be available")
+        except Exception:
+            print("Variable definition file not specific. Abstraction methods for handling the dataframe won't be available")
     
-    def write_variable_definitions(self) -> None:
+    def export_variable_definitions(self) -> None:
         """TODO DOCSTRING
         :return: 
         """
