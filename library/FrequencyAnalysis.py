@@ -38,7 +38,6 @@ class FrequencyAnalysis(Analysis):
                                                                               normalize=True)
         else:
             print("Method not support when no variable definition is available")
-    
 
     def print_frequency_tables(self, columns: List[str] = None) -> None:
         """
@@ -52,13 +51,13 @@ class FrequencyAnalysis(Analysis):
         if self.df_helper.variables is not None:
             if isinstance(columns, list):  # handle a list of columns
                 for column in columns:
-                    self.__print_single_variable(column)
+                    self._print_single_variable(column)
             else:
                 print('Unsupported parameter type %s' % (type(columns), ))
         else:
             print("Method not support when no variable definition is available")
 
-    def __print_single_variable(self, column: str) -> None:
+    def _print_single_variable(self, column: str) -> None:
         """
         TODO DOCSTRING
         :param column: 

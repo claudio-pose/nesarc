@@ -25,14 +25,14 @@ class DataFrameHelper:
     dataset_path = None
     variable_definition_path = None
     
-    def __init__(self, *args, **kwargs):
+    def __init__(self, dataset_path: str, *args, **kwargs):
         """
         TODO DOCSTRING
         :param args: 
         :param kwargs: 
         """
 
-        self.dataset_path = kwargs.get('dataset_path', None)
+        self.dataset_path = dataset_path
         self.variable_definition_path = kwargs.get('variable_definition_path', None)
         self.import_variable_definitions()
 
@@ -50,9 +50,12 @@ class DataFrameHelper:
         
             for column in defined_columns:
                 dtypes[column] = self.variables[column]['type']
-        
-        self.df = pd.read_csv(self.dataset_path, low_memory=False, na_values=' ', dtype=dtypes)     
-    
+
+        if self.dataset_path is not None:
+            self.df = pd.read_csv(self.dataset_path, low_memory=False, na_values=' ', dtype=dtypes)
+        else:
+            raise TypeError("dataset_path is undefined")
+
         if self.variables is not None:
             self.columns = defined_columns
             self.df = self.df[defined_columns]
