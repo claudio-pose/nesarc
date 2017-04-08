@@ -10,7 +10,7 @@ import json
 import os.path
 import os
 from pathlib import Path
-from typing import Tuple
+
 
 class DataFrameHelper:
     """
@@ -19,27 +19,29 @@ class DataFrameHelper:
 
     df = None
     columns = None
-    freq = dict()
-    percent = dict()
     dataset_path = None
     variable_definition_path = None
     variables = None
     dataset_path = None
     variable_definition_path = None
     
-    def __init__(self, dataset_path: str, variable_definition_path: str):
+    def __init__(self, *args, **kwargs):
         """
         TODO DOCSTRING
-        :param dataset_path: 
-        :param variable_definition_path: 
+        :param args: 
+        :param kwargs: 
         """
 
-        self.dataset_path = dataset_path
-        self.variable_definition_path = variable_definition_path
+        self.dataset_path = kwargs.get('dataset_path', None)
+        self.variable_definition_path = kwargs.get('variable_definition_path', None)
         self.import_variable_definitions()
 
-
     def import_data(self):
+        """
+        TODO: DOCSTRING
+        :return: 
+        """
+
         dtypes = dict()
         defined_columns = None
         
@@ -60,26 +62,6 @@ class DataFrameHelper:
                     self.df[column].cat.set_categories(new_categories=self.variables[column]['labels'], rename=True, inplace=True)            
         else:
             self.columns = self.df.columns
-
-
-    def calc_frequency_tables(self) -> Tuple[str, str]:
-        """Calculates the value distribution (frequencies and percentages) for specified columns of a given dataframe.
-        If no columns are passed, the value distribution will be calculated for all colums of the dataframe.
-
-        @author: Claudio Pose
-        :return: 
-        """
-        
-        # TODO: Refracter: Move this method in a seprate subclass (FrequencyTableAnalysis)
-
-        if self.variables is not None:
-            for column in self.variables:        
-                self.freq[column] = self.df[column].value_counts(sort=self.variables[column]['sort'], dropna=self.variables[column]['dropna'])
-                self.percent[column] = self.df[column].value_counts(sort=self.variables[column]['sort'], dropna=self.variables[column]['dropna'], normalize=True)
-        
-                print(type(self.freq))
-                return self.freq, self.percent
-            
     
     def import_variable_definitions(self) -> None:
         """TODO DOCSTRING
@@ -103,8 +85,12 @@ class DataFrameHelper:
 
         path = Path(self.variable_definition_path)
         if path.is_file():
-            os.remove(self.variable_definition_path + '.old')  # delete old backup
-            os.rename(self.variable_definition_path, self.variable_definition_path + '.old')  # mark last saved variable definition as "old"
+            # delete old backup
+            os.remove(self.variable_definition_path.join('.old'))
 
-        with open(self.variable_definition_path, 'w') as outfile:  # serialize current active variable definition
+            # mark last saved variable definition as "old"
+            os.rename(self.variable_definition_path, self.variable_definition_path('.old'))
+
+        # serialize current active variable definition
+        with open(self.variable_definition_path, 'w') as outfile:
             json.dump(self.variables, outfile)
