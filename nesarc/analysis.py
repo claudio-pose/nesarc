@@ -41,5 +41,5 @@ if __name__ == "__main__":
     dfh_sub_anti_social.df = dfh_sub_anti_social.df[(dfh_sub_anti_social.df.S12Q2A12 == 'Yes')]
 
     # Print distribution of the variable ANTISOCDX2 (diagnosed personality disorder) for the subset created above
-    fra_dfh_sub_illegal_childhood = FrequencyAnalysis(df_helper=dfh_sub_anti_social)
-    fra_dfh_sub_illegal_childhood.print_frequency_tables(['ANTISOCDX2'])
+    fra_dfh_sub_anti_social = FrequencyAnalysis(df_helper=dfh_sub_anti_social)
+    fra_dfh_sub_anti_social.print_frequency_tables(['ANTISOCDX2'])
