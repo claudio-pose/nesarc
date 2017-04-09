@@ -68,6 +68,8 @@ class FrequencyAnalysis(Analysis):
             print("Frequency table for variable '%s' not found. Check if the variable was defined in the variable definition" % (column, ))
         else:  # print the frequencies and percentages for the given variable
             print('---------------------------------')
+            print(self.df_helper.variables[column]['description'])
+            print('---------------------------------')
             print('\nFREQUENCIES')
             print(self.freq[column])
             print('\nPERCENTAGES')
