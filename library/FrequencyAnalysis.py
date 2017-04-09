@@ -31,7 +31,7 @@ class FrequencyAnalysis(Analysis):
         if self.df_helper.variables is not None:
             for column in self.df_helper.variables.keys():
                 self.freq[column] = self.df_helper.df[column].value_counts(sort=self.df_helper.variables[column]['sort'],
-                                                                           dropna=self.df_helper.variables[column]['dropna'])
+                                                                           dropna=False)
 
                 self.percent[column] = self.df_helper.df[column].value_counts(sort=self.df_helper.variables[column]['sort'],
                                                                               dropna=self.df_helper.variables[column]['dropna'],
