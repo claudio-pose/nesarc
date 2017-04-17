@@ -21,6 +21,8 @@ class DataFrameHelper:
     columns = None
     dataset_path = None
     variable_definition_path = None
+    limit_columns = False
+    nrows = 0
     variables = None
     dataset_path = None
     variable_definition_path = None
@@ -34,6 +36,8 @@ class DataFrameHelper:
 
         self.dataset_path = dataset_path
         self.variable_definition_path = kwargs.get('variable_definition_path', None)
+        self.limit_columns = kwargs.get('limit_columns', None)
+        self.nrows = kwargs.get('nrows', None)
         self.import_variable_definitions()
 
     def import_data(self):
@@ -51,14 +55,18 @@ class DataFrameHelper:
             for column in defined_columns:
                 dtypes[column] = self.variables[column]['type']
 
+        if self.limit_columns is True:
+            usecols = defined_columns
+        else:
+            usecols = None
+
         if self.dataset_path is not None:
-            self.df = pd.read_csv(self.dataset_path, low_memory=False, na_values=' ', dtype=dtypes)
+            self.df = pd.read_csv(self.dataset_path, low_memory=False, na_values=' ', dtype=dtypes, nrows=self.nrows, usecols=usecols)
         else:
             raise TypeError("dataset_path is undefined")
 
         if self.variables is not None:
             self.columns = defined_columns
-            self.df = self.df[defined_columns]
             
             for column in defined_columns:
                 if self.variables[column]['type'] == 'category':
